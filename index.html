@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Cards - Create Beautiful Invitations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #651fff;
+            --secondary: #4ECDC4;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --accent: #FFE66D;
+            --gray: #6C757D;
+            --light-gray: #f5f7fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5018d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(101, 31, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #3bbbb4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+        }
+
+        /* Profile Dropdown */
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--light-gray);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        .profile-btn img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            width: 200px;
+            padding: 1rem;
+            z-index: 100;
+            display: none;
+        }
+
+        .profile-dropdown.show {
+            display: block;
+        }
+
+        .profile-dropdown a {
+            display: block;
+            padding: 0.8rem 1rem;
+            text-decoration: none;
+            color: var(--dark);
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .profile-dropdown a:hover {
+            background: var(--light-gray);
+        }
+
+        .profile-dropdown a i {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 5%;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 10px solid white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(101, 31, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .feature-icon i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* Templates Section */
+        .templates {
+            padding: 5rem 5%;
+            background: var(--light-gray);
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .template-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .template-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .template-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .template-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .template-card:hover .template-image img {
+            transform: scale(1.1);
+        }
+
+        .template-info {
+            padding: 1.5rem;
+        }
+
+        .template-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .template-info p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .template-info a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        .template-info a i {
+            transition: transform 0.3s;
+        }
+
+        .template-info a:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 5%;
+            background: white;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--light-gray);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-details h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-details p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--primary) 0%, #7c4dff 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-column p {
+            opacity: 0.7;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.7;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .team-section {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 0.5rem;
+            border: 2px solid var(--primary);
+        }
+
+        .team-member p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 450px;
+            padding: 2rem;
+            position: relative;
+            transform: translateY(50px);
+            transition: transform 0.5s;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-tab {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .modal-tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .modal-body {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-options a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .modal-footer {
+            text-align: center;
+        }
+
+        .modal-footer p {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .modal-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .features, .templates, .testimonials, .cta {
+                padding: 3rem 1rem;
+            }
+            
+            footer {
+                padding: 3rem 1rem 1rem;
+            }
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Help Button */
+        .help-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(101, 31, 255, 0.3);
+            z-index: 99;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .help-button:hover {
+            transform: scale(1.1);
+        }
+
+.btn {
+  text-decoration: none;
+  display: inline-block;
+}
+
+        /*logo*/
+
+        .logo {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* spacing between logo image and text */
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000;
+}
+
+.logo-img {
+  height: 60px; /* adjust size */
+  width: auto;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+   <header>
+  <nav class="navbar">
+    <a href="#" class="logo">
+      <img src="border/logo.png" alt="Happy Cards Logo" class="logo-img">
+      <span style="color: #651fff;">Happy <span>Cards</span></span>
+    </a>
+    
+    <ul class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Templates</a>
+      <a href="#">Features</a>
+      <a href="#">Pricing</a>
+      <a href="#">About</a>
+    </ul>
+    
+    <div class="nav-buttons">
+      <!-- Show when user is not logged in -->
+      <div id="auth-buttons">
+        <button class="btn btn-outline" id="login-btn">Login</button>
+        <button class="btn btn-primary" id="signup-btn">Sign Up</button>
+      </div>
+      
+      <!-- Show when user is logged in -->
+      <div id="user-profile" class="profile-container" style="display: none;">
+        <div class="profile-btn">
+          <img src="https://ui-avatars.com/api/?name=User&background=651fff&color=fff" alt="User">
+          <span>User</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="profile-dropdown">
+          <a href="#"><i class="fas fa-user"></i> Profile</a>
+          <a href="#"><i class="fas fa-cog"></i> Settings</a>
+          <a href="#"><i class="fas fa-palette"></i> My Designs</a>
+          <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+    
+    <button class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
+</header>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Create Stunning <span>Invitations</span> in Minutes </h1>
+            <p>Design beautiful, custom invitations for any occasion with our easy-to-use online tool. Perfect for weddings, birthdays, baby showers, and more!</p>
+            <div class="hero-buttons">
+  <a href="custom.html" class="btn btn-primary">Start Designing</a>
+  <button class="btn btn-secondary">Browse Templates</button>
+</div>
+        </div>
+
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-header">
+            <h2>Why Choose Happy Cards? </h2>
+            <p>Our platform makes it easy to create professional invitations that impress your guests</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3>Easy Design Tool</h3>
+                <p>Our drag-and-drop editor makes customization simple, even if you're not a designer.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-images"></i>
+                </div>
+                <h3>500+ Templates</h3>
+                <p>Choose from hundreds of professionally designed templates for any occasion.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-print"></i>
+                </div>
+                <h3>Print or Digital</h3>
+                <p>Send digitally or get high-quality printed cards delivered to your door.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3>Cloud Saving</h3>
+                <p>Your designs are automatically saved to the cloud so you can access them anywhere.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <h3>Easy Sharing</h3>
+                <p>Share your designs via email, social media, or direct link with just one click.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Secure & Private</h3>
+                <p>Your data and designs are protected with enterprise-grade security.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section class="templates">
+        <div class="section-header">
+            <h2>Popular Template Categories 🎨</h2>
+            <p>Browse our most popular invitation designs to get inspired</p>
+        </div>
+        <div class="templates-grid">
+            <div class="template-card">
+                <div class="template-image">
+                    <img src="https://images.unsplash.com/photo-1532117182044-031e7cd916ee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Wedding Invitation">
+                </div>
+                <div class="template-info">
+                    <h3>Wedding Invitations 💒</h3>
+                    <p>Elegant designs for your special day</p>
+                    <a href="#">Explore Templates <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="template-card">
+                <div class="template-image">
+                    <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Birthday Invitation">
+                </div>
+                <div class="template-info">
+                    <h3>Birthday Parties 🎂</h3>
+                    <p>Fun designs for all ages</p>
+                    <a href="#">Explore Templates <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="template-card">
+                <div class="template-image">
+                    <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Corporate Event Invitation">
+                </div>
+                <div class="template-info">
+                    <h3>Corporate Events 💼</h3>
+                    <p>Professional designs for business</p>
+                    <a href="#">Explore Templates <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-header">
+            <h2>What Our Users Say ❤️</h2>
+            <p>Join thousands of satisfied customers who have created beautiful invitations with Happy Cards</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "I created my wedding invitations with Happy Cards and everyone loved them! The process was so easy and the results were professional."
+                </div>
+                <div class="testimonial-author">
+                    <img src="border\sakthi.jpg" alt="Sarah Johnson">
+                    <div class="author-details">
+                        <h4>Sakthi</h4>
+                        <p>Wedding Planner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "As a small business owner, I need to create professional invitations for events regularly. Happy Cards saves me time and money!"
+                </div>
+                <div class="testimonial-author">
+                    <img src="border\srishanth.jpg" alt="Michael Chen">
+                    <div class="author-details">
+                        <h4>SriShanth</h4>
+                        <p>Event Manager</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "The templates are gorgeous and the customization options are endless. I've used Happy Cards for all my party invitations this year!"
+                </div>
+                <div class="testimonial-author">
+                    <img src="border\deepak.jpg" alt="Emily Rodriguez">
+                    <div class="author-details">
+                        <h4>Deepak</h4>
+                        <p>Marketing Director</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Create Your Invitation?</h2>
+        <p>Join thousands of users who are already creating beautiful invitations with Happy Cards</p>
+        <a href="custom.html" class="btn btn-primary"><button class="btn btn-secondary">Get Started For Free</button></a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Happy Cards</h3>
+                <p>Making invitation design simple and accessible for everyone. Create, customize, and share beautiful invitations for any occasion.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Templates</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Template Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Wedding Invitations</a></li>
+                    <li><a href="#">Birthday Invitations</a></li>
+                    <li><a href="#">Baby Showers</a></li>
+                    <li><a href="#">Holiday Cards</a></li>
+                    <li><a href="#">Corporate Events</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Design Street, Creative City</p>
+                <p><i class="fas fa-phone"></i> +91-9345457411 (Vishal)</p>
+                <p><i class="fas fa-phone"></i> +91-6369465872 (Sreedhar)</p>
+                <p><i class="fas fa-envelope"></i> support@happycards.com</p>
+                
+                <h3 style="margin-top: 1.5rem;">Our Team</h3>
+                <div class="team-section">
+                    <div class="team-member">
+                        <img src="border\vishal.jpg" alt="Vishal">
+                        <p>Vishal</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="border\sreedhar.jpg" alt="Sreedhar">
+                        <p>Sreedhar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Happy Cards. All rights reserved. | Designed with ❤️ by Team Happy Cards</p>
+        </div>
+    </footer>
+
+    <!-- Help Button -->
+    <div class="help-button">
+        <i class="fas fa-headset"></i>
+    </div>
+
+    <!-- Login/Signup Modal -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="modal">
+            <button class="modal-close" id="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h2>Welcome to Happy Cards</h2>
+                <p>Login or create an account to get started</p>
+            </div>
+            <div class="modal-tabs">
+                <div class="modal-tab active" data-tab="login">Login</div>
+                <div class="modal-tab" data-tab="signup">Sign Up</div>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                    </div>
+                    <div class="form-options">
+                        <label>
+                            <input type="checkbox"> Remember me
+                        </label>
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                </form>
+                
+                <form id="signup-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" placeholder="Create a password" required>
+                    </div>
+                    <div class="form-options">
+                        <label>
+                            <input type="checkbox" required> I agree to the Terms & Conditions
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <p>Or continue with</p>
+                <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+                    <button class="btn btn-outline" style="flex: 1;"><i class="fab fa-google"></i> Google</button>
+                    <button class="btn btn-outline" style="flex: 1;"><i class="fab fa-facebook-f"></i> Facebook</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auth elements
+            const authButtons = document.getElementById('auth-buttons');
+            const userProfile = document.getElementById('user-profile');
+            const loginBtn = document.getElementById('login-btn');
+            const signupBtn = document.getElementById('signup-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const authModal = document.getElementById('auth-modal');
+            const modalClose = document.getElementById('modal-close');
+            const modalTabs = document.querySelectorAll('.modal-tab');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const customizeBtn = document.getElementById('customize-btn');
+            const profileBtn = document.querySelector('.profile-btn');
+            const profileDropdown = document.querySelector('.profile-dropdown');
+            
+            // Check if user is logged in (from localStorage)
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            
+            if (isLoggedIn) {
+                authButtons.style.display = 'none';
+                userProfile.style.display = 'block';
+            } else {
+                authButtons.style.display = 'flex';
+                userProfile.style.display = 'none';
+            }
+            
+            // Show auth modal
+            loginBtn.addEventListener('click', () => {
+                authModal.classList.add('active');
+                document.querySelector('.modal-tab[data-tab="login"]').click();
+            });
+            
+            signupBtn.addEventListener('click', () => {
+                authModal.classList.add('active');
+                document.querySelector('.modal-tab[data-tab="signup"]').click();
+            });
+            
+            // Close modal
+            modalClose.addEventListener('click', () => {
+                authModal.classList.remove('active');
+            });
+            
+            // Switch between login and signup tabs
+            modalTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    modalTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    if (tab.dataset.tab === 'login') {
+                        loginForm.style.display = 'block';
+                        signupForm.style.display = 'none';
+                    } else {
+                        loginForm.style.display = 'none';
+                        signupForm.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Login form submission
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                // Simple validation
+                if (email && password) {
+                    // Simulate login success
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('userEmail', email);
+                    
+                    authButtons.style.display = 'none';
+                    userProfile.style.display = 'block';
+                    authModal.classList.remove('active');
+                    
+                    // Update profile name
+                    document.querySelector('.profile-btn span').textContent = email.split('@')[0];
+                    
+                    alert('Login successful! Welcome back!');
+                }
+            });
+            
+            // Signup form submission
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('signup-name').value;
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                
+                // Simple validation
+                if (name && email && password) {
+                    // Simulate signup success
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('userEmail', email);
+                    localStorage.setItem('userName', name);
+                    
+                    authButtons.style.display = 'none';
+                    userProfile.style.display = 'block';
+                    authModal.classList.remove('active');
+                    
+                    // Update profile name
+                    document.querySelector('.profile-btn span').textContent = name;
+                    document.querySelector('.profile-btn img').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=651fff&color=fff`;
+                    
+                    alert('Account created successfully! Welcome to Happy Cards!');
+                }
+            });
+            
+            // Logout functionality
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userName');
+                
+                authButtons.style.display = 'flex';
+                userProfile.style.display = 'none';
+                
+                alert('You have been logged out successfully.');
+            });
+            
+            // Toggle profile dropdown
+            profileBtn.addEventListener('click', () => {
+                profileDropdown.classList.toggle('show');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!profileBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+                    profileDropdown.classList.remove('show');
+                }
+            });
+            
+            // Customize button - redirect to custom page if logged in, else show login
+            customizeBtn.addEventListener('click', () => {
+                if (isLoggedIn) {
+                    window.location.href = 'custom.html'; // Replace with your custom page URL
+                } else {
+                    authModal.classList.add('active');
+                    document.querySelector('.modal-tab[data-tab="login"]').click();
+                }
+            });
+            
+            // Help button functionality
+            document.querySelector('.help-button').addEventListener('click', () => {
+                alert('Need help? Contact our support team at support@happycards.com or call +91-9345457411 (Vishal) / +91-6369465872 (Sreedhar)');
+            });
+        });
+    </script>
+</body>
+</html>
